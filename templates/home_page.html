@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<!--<ul>-->
+	<!--{% for key, value in headers.items() %}-->
+	<!--<h1>Key: {{key}}</h1>-->
+	<!--<h2>Value: {{value}}</h2>-->
+	<!--{% endfor %}-->
+<!--</ul>-->
+<!--<script src="{{url_for('static', filename='src.js')}}"></script>-->
+<script>
+var data = {{ headers|tojson }};
+console.log(data);
+console.log(navigator.plugins);
+</script>
+{% endblock %}
