@@ -1,15 +1,46 @@
 {% extends "layout.html" %}
 {% block body %}
-<!--<ul>-->
-	<!--{% for key, value in headers.items() %}-->
-	<!--<h1>Key: {{key}}</h1>-->
-	<!--<h2>Value: {{value}}</h2>-->
-	<!--{% endfor %}-->
-<!--</ul>-->
-<!--<script src="{{url_for('static', filename='src.js')}}"></script>-->
+<script src="{{url_for('static', filename='fontdetect.js')}}"></script>
 <script>
+//http headers
 var data = {{ headers|tojson }};
 console.log(data);
+
+//plugins
 console.log(navigator.plugins);
+
+//timezone
+var date = new Date();
+var offset = date.getTimezoneOffset();
+console.log(offset);
+
+//screen resolution
+var width = screen.width;
+var height = screen.height;
+var colorDepth = screen.colorDepth;
+console.log(width + "x" + height + "x" + colorDepth);
+
+//do not track
+var dnt = navigator.doNotTrack != null ? true : false;
+console.log(dnt);
+
+//cookies enabled
+var cookieEnabled = navigator.cookieEnabled;
+console.log(cookieEnabled);
+
+//platform
+var platform = navigator.platform;
+console.log(platform);
+
+//number of cores
+var numCores = navigator.hardwareConcurrency;
+console.log(numCores);
+
+//fonts
+var allFonts = {{ fonts|tojson }};
+var detector = new Detector();
+var filteredFonts = allFonts.filter(font => detector.detect(font));
+console.log(filteredFonts);
+
 </script>
 {% endblock %}
