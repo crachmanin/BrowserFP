@@ -1,5 +1,10 @@
+AR PL UMing CN
+AR PL UMing HK
+AR PL UMing TW
+AR PL UMing TW MBE
 Abadi MT Condensed Extra Bold
 Abadi MT Condensed Light
+Abyssinica SIL
 Academy Engraved LET
 Adobe Caslon Pro
 Adobe Fangsong Std
@@ -88,6 +93,7 @@ BiauKai
 Big Caslon
 BinnerD
 Birch Std
+Bitstream Charter
 Bitstream Vera Mono
 Blackmoor LET
 Blackoak Std
@@ -118,6 +124,7 @@ Brush Script MT
 Brush Script Std
 CG Omega
 CG Times
+Caladea
 Calibri
 Calibri Light
 Calisto MT
@@ -125,11 +132,14 @@ Calligrapher
 Cambria
 Cambria Math
 Candara
+Cantarell
+Carlito
 CaslonOpnface BT
 Casual
 Century
 Century Gothic
 Century Schoolbook
+Century Schoolbook L
 Cezanne
 Chalkboard
 Chalkboard SE
@@ -145,6 +155,7 @@ Chaucer
 ChelthmITC Bk BT
 Chicago
 Clarendon Condensed
+Clean
 CloisterBlack BT
 Cochin
 Colonna MT
@@ -166,11 +177,13 @@ Cornerstone
 Coronet
 Corsiva Hebrew
 Courier
+Courier 10 Pitch
 Courier New
 Cousine
 Cracked
 Cuckoo
 Curlz MT
+Cursor
 DFKai-SB
 Damascus
 DaunPenh
@@ -178,9 +191,18 @@ Dauphin
 David
 DecoType Naskh
 Default 8x16
+DejaVu LGC Sans
+DejaVu LGC Sans Condensed
+DejaVu LGC Sans Light
+DejaVu LGC Sans Mono
+DejaVu LGC Serif
+DejaVu LGC Serif Condensed
 DejaVu Sans
+DejaVu Sans Condensed
+DejaVu Sans Light
 DejaVu Sans Mono
 DejaVu Serif
+DejaVu Serif Condensed
 Dengxian
 Denmark
 Desdemona
@@ -190,6 +212,7 @@ Devanagari Sangam MN
 Didot
 DilleniaUPC
 Dina
+Dingbats
 Diwan Kufi
 Diwan Thuluth
 DokChampa
@@ -218,6 +241,7 @@ Fantasque Sans Mono
 Farah
 Farisi
 Fira Mono
+Fixed
 Footlight MT Light
 FrankRuehl
 Franklin Gothic Book
@@ -262,6 +286,9 @@ Gill Sans Nova
 Gill Sans Ultra Bold
 Gisha
 Gloucester MT Extra Condensed
+Goha
+Goha Tibeb
+Goha Zemen
 Gohu
 Goudy Old Style
 GoudyHandtooled BT
@@ -294,6 +321,14 @@ Helvetica CY
 Helvetica Neue
 Herald
 Herculanum
+Hershey
+Hershey Complex
+Hershey German
+Hershey Gothic
+Hershey Italic
+Hershey Plain
+Hershey Script
+Hershey Triplex
 Hiragino Kaku Gothic Pro
 Hiragino Kaku Gothic ProN
 Hiragino Kaku Gothic Std
@@ -328,6 +363,7 @@ JasmineUPC
 Javanese Text
 Jazz LET
 Jester
+Jomolhari
 Jung Gothic
 Kabel Bk BT
 Kabel Ult BT
@@ -343,6 +379,9 @@ Kaufmann Bd BT
 Kefa
 Keyboard
 Khmer MN
+Khmer OS
+Khmer OS Content
+Khmer OS System
 Khmer Sangam MN
 Khmer UI
 Kino MT
@@ -358,6 +397,7 @@ Kozuka Mincho Pro
 Krungthep
 KufiStandard GK
 KufiStandardGK
+LKLUG
 Lao MN
 Lao Sangam MN
 Lao UI
@@ -372,6 +412,7 @@ LiHei Pro
 LiSong Pro
 Liberation Mono
 Liberation Sans
+Liberation Sans Narrow
 Liberation Serif
 LilyUPC
 Lime
@@ -380,6 +421,18 @@ Linux Libertine
 Lithograph
 Lithograph Light
 Lithos Pro
+Lohit Assamese
+Lohit Bengali
+Lohit Devanagari
+Lohit Gujarati
+Lohit Kannada
+Lohit Malayalam
+Lohit Marathi
+Lohit Nepali
+Lohit Oriya
+Lohit Punjabi
+Lohit Tamil
+Lohit Telugu
 Long Island
 Lucida Blackletter
 Lucida Bright
@@ -406,6 +459,7 @@ MS Reference Specialty
 MS UI Gothic
 MT Extra
 MV Boli
+Madan
 Malayalam MN
 Malayalam Sangam MN
 Malgun Gothic
@@ -414,8 +468,23 @@ Marigold
 Marker Felt
 Market
 Marlett
+MathJax_AMS
+MathJax_Caligraphic
+MathJax_Fraktur
+MathJax_Main
+MathJax_Math
+MathJax_SansSerif
+MathJax_Script
+MathJax_Size1
+MathJax_Size2
+MathJax_Size3
+MathJax_Size4
+MathJax_Typewriter
+MathJax_WinChrome
+MathJax_WinIE6
 Matisse ITC
 Matura MT Script Capitals
+Meera
 Meiryo
 Meiryo UI
 Menlo
@@ -459,6 +528,8 @@ Myriad Pro
 NISC GB18030
 NSimSun
 Nadeem
+NanumGothic
+NanumGothicExtraBold
 Narkisim
 Neue Haas Grotesk Text Pro
 New Peninim
@@ -467,20 +538,30 @@ New York
 News Gothic MT
 News GothicMT
 NewsGoth BT
+Nimbus Mono L
+Nimbus Roman No9 L
+Nimbus Sans L
 Nirmala UI
 Noteworthy
 Nueva Std
+Nuosu SIL
 Nyala
 OCR A Extended
 OCR A Std
 Old Century
 Onyx
 Onyx BT
+Open Sans
+Open Sans Extrabold
+Open Sans Light
+Open Sans Semibold
+OpenSymbol
 Optima
 Orator Std
 Oriya MN
 Oriya Sangam MN
 Osaka
+Overpass
 OzHandicraft BT
 PC Myungjo
 PMingLiU
@@ -491,6 +572,8 @@ PT Sans Narrow
 PT Serif
 PT Serif Caption
 PTBarnum BT
+Padauk
+PakType Naskh Basic
 Palatino
 Palatino Linotype
 Papyrus
@@ -528,6 +611,7 @@ ST FangSong
 ST Heiti
 ST Kaiti
 ST Song
+STIX
 STIXGeneral
 STIXIntegralsD
 STIXIntegralsSm
@@ -599,6 +683,7 @@ Source Code Pro
 Source Sans Pro
 Souvenir Lt BT
 Staccato222 BT
+Standard Symbols L
 Steamer
 Stencil
 Stencil Std
@@ -650,21 +735,34 @@ TypoUpright BT
 UD Digi KyoKasho N-R
 UD Digi KyoKasho NK-R
 UD Digi KyoKasho NP-R
+URW Bookman L
+URW Chancery L
+URW Gothic L
+URW Palladio L
 Ubuntu Font Family
 Unicorn
 Unifont
 Univers
 Univers Condensed
 Urdu Typesetting
+Utopia
 Utsaah
+VL Gothic
+VL ゴシック
 Vagabond
 Vani
 Verdana
 Verdana Pro
 Vijaya
 Vrinda
+Waree
 Waseem
 Webdings
+WenQuanYi Micro Hei
+WenQuanYi Micro Hei Mono
+WenQuanYi Zen Hei
+WenQuanYi Zen Hei Mono
+WenQuanYi Zen Hei Sharp
 Westminster
 Wide Latin
 Wingdings
@@ -681,3 +779,15 @@ ZapfHumnst Dm BT
 Zapfino
 Zurich BlkEx BT
 Zurich Ex BT
+나눔고딕
+나눔고딕 ExtraBold
+文泉驛正黑
+文泉驿正黑
+文泉驛微米黑
+文泉驿微米黑
+文泉驛等寬正黑
+文泉驛點陣正黑
+文泉驿点阵正黑
+文泉驿等宽正黑
+文泉驛等寬微米黑
+文泉驿等宽微米黑
