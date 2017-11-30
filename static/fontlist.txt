@@ -1,199 +1,683 @@
-Abadi
-Al
-Albertus
+Abadi MT Condensed Extra Bold
+Abadi MT Condensed Light
+Academy Engraved LET
+Adobe Caslon Pro
+Adobe Fangsong Std
+Adobe Garamond Pro
+Adobe Heiti Std
+Adobe Kaiti Std
+Adobe Ming Std
+Adobe Myungjo Std
+Adobe Song Std
+Aharoni
+Al Bayan
+Al Nile
+Al Tarikh
+Albertus Extra Bold
+Albertus Medium
+Aldhabi
 Allegro
-Amazone
-AmerType
-American
-Andalé
-Antique
-Apple
+Amazone BT
+AmerType Md BT
+American Typewriter
+Andale Mono
+Andale Mono IPA
+Andalus
+Andalé Mono
+Andika
+Angsana New
+AngsanaUPC
+Anonymous Pro
+Antique Olive
+Aparajita
+Apple Braille
+Apple Casual
+Apple Chancery
+Apple Color Emoji
+Apple Garamond
+Apple Gothic
+Apple LiGothic
+Apple LiSung
+Apple Myungjo
+Apple SD Gothic Neo
+Apple Symbols
+AppleGothic
+AppleMyungjo
 AquaKana
+Arabic Typesetting
 Arial
-Arrus
-Aurora
-AvantGarde
+Arial Black
+Arial Hebrew
+Arial Hebrew Scholar
+Arial MT
+Arial Narrow
+Arial Nova
+Arial Rounded MT Bold
+Arial Unicode MS
+Arimo
+Arrus BT
+Aurora Cn BT
+AvantGarde Bk BT
+AvantGarde Md BT
+Avenir
+Avenir Next
+Avenir Next Condensed
 Ayuthaya
 Baghdad
-BankGothic
+Bahnschrift
+Bangla MN
+Bangla Sangam MN
+Bank Gothic
+BankGothic Md BT
 Baskerville
+Baskerville Old Face
+Batang
+BatangChe
+Bauhaus 93
 Bazooka
 Beijing
-Benguiat
-BernhardFashion
-BernhardMod
+Beirut
+Bell Gothic Std
+Bell MT
+Benguiat Bk BT
+Berling Antiqua
+Bernard MT Condensed
+BernhardFashion BT
+BernhardMod BT
 BiauKai
-Big
+Big Caslon
 BinnerD
-Book
-Bookman
+Birch Std
+Bitstream Vera Mono
+Blackmoor LET
+Blackoak Std
+BlairMdITC TT
+Bodoni 72
+Bodoni 72 Oldstyle
+Bodoni 72 Smallcaps
+Bodoni Ornaments
+Bodoni Ornaments ITC TT
+Bodoni SvtyTwo ITC TT
+Bodoni SvtyTwo OS ITC TT
+Bodoni SvtyTwo SC ITC TT
+Book Antiqua
+Bookdings
+Bookman Old Style
+Bookshelf Symbol 7
+Bordeaux Roman Bold LET
 Boulder
-Bremen
-Brush
-CG
-Calisto
+Bradley Hand
+Bradley Hand ITC TT
+Braggadocio
+Bremen Bd BT
+Britannic Bold
+Browallia New
+BrowalliaUPC
+Brush Script
+Brush Script MT
+Brush Script Std
+CG Omega
+CG Times
+Calibri
+Calibri Light
+Calisto MT
 Calligrapher
-CaslonOpnface
+Cambria
+Cambria Math
+Candara
+CaslonOpnface BT
+Casual
 Century
+Century Gothic
+Century Schoolbook
 Cezanne
 Chalkboard
+Chalkboard SE
 Chalkduster
+Chaparral Pro
 Charcoal
+Charcoal CY
+Charlemagne Std
 Charlesworth
-Charter
+Charter BT
+Charter Bd BT
 Chaucer
-ChelthmITC
+ChelthmITC Bk BT
 Chicago
-Clarendon
-CloisterBlack
+Clarendon Condensed
+CloisterBlack BT
 Cochin
-Comic
+Colonna MT
+Comic Sans
+Comic Sans MS
+Consolas
+Constantia
 Cooper
-CopperplGoth
+Cooper Black
+Cooper Std
+CopperplGoth Bd BT
 Copperplate
+Copperplate Gothic Bold
+Copperplate Gothic Light
+Corbel
+Cordia New
+CordiaUPC
 Cornerstone
 Coronet
-Corsiva
+Corsiva Hebrew
 Courier
+Courier New
+Cousine
+Cracked
 Cuckoo
+Curlz MT
+DFKai-SB
+Damascus
+DaunPenh
 Dauphin
-DecoType
+David
+DecoType Naskh
+Default 8x16
+DejaVu Sans
+DejaVu Sans Mono
+DejaVu Serif
+Dengxian
 Denmark
+Desdemona
 Devanagari
+Devanagari MT
+Devanagari Sangam MN
 Didot
-English
-EngraversGothic
+DilleniaUPC
+Dina
+Diwan Kufi
+Diwan Thuluth
+DokChampa
+Dotum
+DotumChe
+Droid Sans
+Droid Sans Mono
+Droid Serif
+EB Garamond
+Ebrima
+Eccentric Std
+Edwardian Script ITC
+English 111 Vivace BT
+Engravers MT
+EngraversGothic BT
+Envy Code R
+Estrangelo Edessa
+EucrosiaUPC
 Euphemia
-Exotc350
-Fang
+Euphemia UCAS
+Eurostile
+Exotc350 Bd BT
+Fang Song
+FangSong
+Fantasque Sans Mono
+Farah
+Farisi
+Fira Mono
+Footlight MT Light
+FrankRuehl
+Franklin Gothic Book
+Franklin Gothic Medium
 Fransiscan
-Freefrm721
-FrnkGothITC
+FreeMono
+FreeSans
+FreeSerif
+Freefrm721 Blk BT
+FreesiaUPC
+FrnkGothITC Bk BT
+Frutiger Linotype
 Futura
-FuturaBlack
+Futura Bk BT
+Futura Lt BT
+Futura Md BT
+Futura ZBlk BT
+FuturaBlack BT
+GB18030 Bitmap
+Gabriola
 Gadget
-Galliard
+Gadugi
+Galliard BT
 Garamond
-Geeza
+Gautami
+Geeza Pro
 Geezah
 Geneva
-GeoSlab
-Geometr231
+Geneva CY
+Gentium
+GeoSlab 703 Lt BT
+GeoSlab 703 XBd BT
+Geometr231 BT
+Geometr231 Hv BT
+Geometr231 Lt BT
 Georgia
-Gill
-GoudyHandtooled
-GoudyOLSt
+Georgia Pro
+Giddyup Std
+Gill Sans
+Gill Sans MT
+Gill Sans Nova
+Gill Sans Ultra Bold
+Gisha
+Gloucester MT Extra Condensed
+Gohu
+Goudy Old Style
+GoudyHandtooled BT
+GoudyOLSt BT
+Guitar Pro 5
 Gujarati
-Gung
+Gujarati MT
+Gujarati Sangam MN
+Gulim
+GulimChe
+Gung Seoche
+Gungsuh
+GungsuhChe
 Gurmukhi
+Gurmukhi MN
+Gurmukhi MT
+Gurmukhi Sangam MN
+Hack
 Haettenschweiler
+Handwriting - Dakota
 Hangangche
+Harrington
 HeadlineA
 Heather
 Hei
+Heiti SC
+Heiti TC
 Helvetica
+Helvetica CY
+Helvetica Neue
 Herald
 Herculanum
-Hiragino
-Hoefler
-Humanst
-Humanst521
+Hiragino Kaku Gothic Pro
+Hiragino Kaku Gothic ProN
+Hiragino Kaku Gothic Std
+Hiragino Kaku Gothic StdN
+Hiragino Maru Gothic Pro
+Hiragino Maru Gothic ProN
+Hiragino Mincho Pro
+Hiragino Mincho ProN
+Hiragino Sans
+Hiragino Sans GB
+Hobo Std
+Hoefler Text
+Humanst 521 Cn BT
+Humanst521 BT
+Humanst521 Lt BT
+ITF Devanagari
+ITF Devanagari Marathi
 Impact
-Inai
-Incised901
-Informal011
+Imprint MT Shadow
+Inai Mathi
+InaiMathi
+Incised901 BT
+Incised901 Bd BT
+Incised901 Lt BT
+Inconsolata
+Inconsolata-g
+Informal011 BT
+Inter UI
+IrisUPC
+Iskoola Pota
+JasmineUPC
+Javanese Text
+Jazz LET
 Jester
-Jung
-Kabel
+Jung Gothic
+Kabel Bk BT
+Kabel Ult BT
 Kai
-Kaufmann
+KaiTi
+Kailasa
+Kalinga
+Kannada MN
+Kannada Sangam MN
+Kartika
+Kaufmann BT
+Kaufmann Bd BT
+Kefa
 Keyboard
-Korinna
+Khmer MN
+Khmer Sangam MN
+Khmer UI
+Kino MT
+KodchiangUPC
+Kohinoor Bangla
+Kohinoor Devanagari
+Kohinoor Telugu
+Kokila
+Kokonor
+Korinna BT
+Kozuka Gothic Pro
+Kozuka Mincho Pro
 Krungthep
-KufiStandard
+KufiStandard GK
+KufiStandardGK
+Lao MN
+Lao Sangam MN
+Lao UI
 LastResort
-Letter
-LiHei
-LiSong
+Latha
+Leelawadee
+Leelawadee UI
+Letter Gothic
+Letter Gothic Std
+Levenim MT
+LiHei Pro
+LiSong Pro
+Liberation Mono
+Liberation Sans
+Liberation Serif
+LilyUPC
+Lime
+Linux Biolinum
+Linux Libertine
 Lithograph
-Long
-Lucida
-Lydian
-MS
+Lithograph Light
+Lithos Pro
+Long Island
+Lucida Blackletter
+Lucida Bright
+Lucida Calligraphy
+Lucida Console
+Lucida Fax
+Lucida Grande
+Lucida Handwriting
+Lucida Sans
+Lucida Sans Typewriter
+Lucida Sans Unicode
+Lucida Typewriter
+Luminari
+Lydian BT
+MS Gothic
+MS Gothic, MS PGothic
+MS LineDraw
+MS Mincho
+MS Mincho, MS PMincho
+MS PGothic
+MS PMincho
+MS Reference Sans Serif
+MS Reference Specialty
+MS UI Gothic
+MT Extra
+MV Boli
+Malayalam MN
+Malayalam Sangam MN
+Malgun Gothic
+Mangal
 Marigold
-Marker
+Marker Felt
 Market
-Matisse
+Marlett
+Matisse ITC
+Matura MT Script Capitals
+Meiryo
+Meiryo UI
 Menlo
+Mesquite Std
+Microsoft Himalaya
+Microsoft JhengHei
+Microsoft JhengHei UI
+Microsoft New Tai Lue
+Microsoft PhagsPa
+Microsoft Sans Serif
+Microsoft Tai Le
+Microsoft Uighur
+Microsoft YaHei
+Microsoft YaHei UI
+Microsoft Yi Baiti
+MingLiU, PMingLiU
+MingLiU-ExtB, PMingLiU-ExtB
+MingLiU_HKSCS
+MingLiU_HKSCS-ExtB
+Minion Pro
+Miriam, Miriam Fixed
+Mishafi
+Mishafi Gold
+Mistral
+Modern No. 20
+Mona Lisa Solid ITC TT
 Monaco
-Monotype
+Monaco CY
+Mongolian Baiti
+Monofur
+Mononoki
+Monotype Corsiva
+Monotype Sorts
+MoolBoran
 Mshtakan
-NISC
+Muna
+Myanmar MN
+Myanmar Sangam MN
+Myanmar Text
+Myriad Pro
+NISC GB18030
+NSimSun
 Nadeem
-New
-News
-NewsGoth
-OCR
-Old
+Narkisim
+Neue Haas Grotesk Text Pro
+New Peninim
+New Peninim MT
+New York
+News Gothic MT
+News GothicMT
+NewsGoth BT
+Nirmala UI
+Noteworthy
+Nueva Std
+Nyala
+OCR A Extended
+OCR A Std
+Old Century
 Onyx
+Onyx BT
 Optima
+Orator Std
+Oriya MN
+Oriya Sangam MN
 Osaka
-OzHandicraft
-PC
-PTBarnum
+OzHandicraft BT
+PC Myungjo
+PMingLiU
+PT Mono
+PT Sans
+PT Sans Caption
+PT Sans Narrow
+PT Serif
+PT Serif Caption
+PTBarnum BT
 Palatino
+Palatino Linotype
 Papyrus
+Party LET
 Pegasus
+Perpetua
+Perpetua Titling MT
+Phosphate
 Pickwick
 Pilgiche
-Plantagenet
+PingFang HK
+PingFang SC
+PingFang TC
+Plantagenet Cherokee
+Playbill
+Poplar Std
+PortagoITC TT
 Poster
-PosterBodoni
+PosterBodoni BT
+Prestige Elite Std
+Princetown LET
+ProFont
+Proggy Programming Fonts
 Pythagoras
 Raanana
-Ribbon131
-ST
+Raavi
+Ribbon131 Bd BT
+Roboto
+Rockwell
+Rockwell Extra Bold
+Rockwell Nova
+Rod
+Rosewood Std
+ST FangSong
+ST Heiti
+ST Kaiti
+ST Song
+STIXGeneral
+STIXIntegralsD
+STIXIntegralsSm
+STIXIntegralsUp
+STIXIntegralsUpD
+STIXIntegralsUpSm
+STIXNonUnicode
+STIXSizeFiveSym
+STIXSizeFourSym
+STIXSizeOneSym
+STIXSizeThreeSym
+STIXSizeTwoSym
+STIXVariants
+STSong
+Sakkal Majalla
+Sana
 Sand
+Sans-serif
+Sanskrit Text
+Santa Fe LET
 Sathu
+Savoye LET
 Sceptre
+SchoolHouse Cursive B
+SchoolHouse Printed A
+Segoe MDL2 Assets
+Segoe Print
+Segoe Script
+Segoe UI Emoji
+Segoe UI Historic[6]
+Segoe UI Symbol
+Segoe UI v5.00 (top) and v5.27 (bottom)
+Segoe UI v5.00[3]
+Segoe UI v5.01[4]
+Segoe UI v5.27[5]
+Segoe UI v5.35
 Seoul
-Serifa
-ShelleyVolante
+Serifa BT
+Serifa Th BT
+ShelleyVolante BT
 Sherwood
-Shin
+Shin Myungjo Neue
+Shonar Bangla
+Shree Devanagari 714
+Shruti
+SignPainter
 Signboard
 Silom
+SimHei
+SimKai
+SimSun
+SimSun-ExtB
+Simplified Arabic
+Sinhala MN
+Sinhala Sangam MN
+Sitka Banner
+Sitka Display
+Sitka Heading
+Sitka Small
+Sitka Subheading
+Sitka Text
 Skia
+Snell Roundhand
 Socket
 Song
-Souvenir
-Staccato222
+Songti SC
+Songti TC
+Source Code Pro
+Source Sans Pro
+Souvenir Lt BT
+Staccato222 BT
 Steamer
+Stencil
+Stencil Std
+Stone Sans ITC TT
+Stone Sans Sem ITC TT
 Storybook
 Subway
-Swis721
-Swiss911
+Sukhumvit Set
+Swis721 BlkEx BT
+Swiss911 XCm BT
+Sylfaen
+SylfaenARM
 Symbol
-Tae
+Synchro LET
+Tae Graphic
 Tahoma
 Taipei
+Tamil MN
+Tamil Sangam MN
+Tamsyn
+TeamViewer9
 Technical
 Techno
+Tekton Pro
 Teletype
-Tempus
+Telugu MN
+Telugu Sangam MN
+Tempus Sans ITC
+Terminus
+Tewi
 Textile
 Thonburi
 Times
+Times CY
+Times New Roman
+Times New Roman PS
+Tinos
+Traditional Arabic
+Trajan Pro
+Trattatello
 Trebuchet
+Trebuchet MS
 Tristan
 Tubular
-TypoUpright
+Tunga
+Tw Cen MT
+Type Embellishments One LET
+TypoUpright BT
+UD Digi KyoKasho N-R
+UD Digi KyoKasho NK-R
+UD Digi KyoKasho NP-R
+Ubuntu Font Family
 Unicorn
+Unifont
 Univers
+Univers Condensed
+Urdu Typesetting
+Utsaah
 Vagabond
+Vani
 Verdana
+Verdana Pro
+Vijaya
+Vrinda
+Waseem
+Webdings
 Westminster
-Zapf
-ZapfEllipt
-ZapfHumnst
-Zurich
+Wide Latin
+Wingdings
+Wingdings 2
+Wingdings 3
+Yu Gothic
+Yu Gothic UI
+Yu Mincho
+Zapf Chancery
+Zapf Dingbats
+ZapfEllipt BT
+ZapfHumnst BT
+ZapfHumnst Dm BT
+Zapfino
+Zurich BlkEx BT
+Zurich Ex BT
