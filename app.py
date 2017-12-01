@@ -15,7 +15,8 @@ def load_all_fonts():
 def hello_world():
     headers = request.headers
     fonts = load_all_fonts()
-    return render_template("home_page.html", headers=dict(headers), fonts=fonts)
+    return render_template("home_page.html", headers=dict(headers), fonts=fonts,
+                           ip=request.remote_addr)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
+<h2 id="info">Calculating Fingerprint...</h2>
+<h3 id="fingerprint">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://bitwiseshiftleft.github.io/sjcl/sjcl.js"></script>
 <script src="{{url_for('static', filename='fontdetect.js')}}"></script>
@@ -14,61 +16,92 @@ function strToB64(input){
 	return btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
 }
 
+function insertRow(table, val1, val2){
+	var tr = table.insertRow();
+	var td = tr.insertCell();
+	td.appendChild(document.createTextNode(val1));
+	td = tr.insertCell();
+	td.appendChild(document.createTextNode(val2));
+}
+
+//console.log({{ip|tojson}});
+
+//hash value for fingerprint
+var hash = new sjcl.hash.sha256();
+
+//creating table
+var tbl  = document.createElement('table');
+var header = tbl.createTHead();
+insertRow(header, 'Attribute', 'Value');
+
 //http headers
 var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
 var headers = {{ headers|tojson }};
 relevantHeaders.forEach(function(entry) {
-    console.log(headers[entry]);
+	insertRow(tbl, entry, headers[entry]);
+	hash.update(headers[entry]);
 });
 
-
 //plugins
-console.log(navigator.plugins);
+var pluginString = "";
+var plugCount = 0;
+for (plug of navigator.plugins){
+	var plugObj = new Object();
+	plugObj.name = plug.name;
+	plugObj.filename = plug.filename;
+	plugObj.description = plug.description;
+	pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
+	plugCount++;
+}
+insertRow(tbl, 'Plugins', pluginString);
+hash.update(pluginString);
 
 //timezone
 var date = new Date();
 var offset = date.getTimezoneOffset();
-console.log(offset);
+insertRow(tbl, "TimeZone Offset", offset);
+hash.update(offset.toString());
 
 //screen resolution
 var width = screen.width;
 var height = screen.height;
 var colorDepth = screen.colorDepth;
-console.log(width + "x" + height + "x" + colorDepth);
+var resString = width + "x" + height + "x" + colorDepth;
+insertRow(tbl, "Screen Resolution", resString);
+hash.update(resString);
 
 //do not track
 var dnt = navigator.doNotTrack != null ? true : false;
-console.log(dnt);
+insertRow(tbl, "Do Not Track", dnt);
+hash.update(dnt.toString());
 
 //cookies enabled
 var cookieEnabled = navigator.cookieEnabled;
-console.log(cookieEnabled);
+insertRow(tbl, "Cookies Enabled", cookieEnabled);
+hash.update(cookieEnabled.toString());
 
 //platform
 var platform = navigator.platform;
-console.log(platform);
+insertRow(tbl, "Platform", platform);
+hash.update(platform);
 
 //number of cores
 var numCores = navigator.hardwareConcurrency;
-console.log(numCores);
-
-//fonts
-var allFonts = {{ fonts|tojson }};
-var detector = new Detector();
-var filteredFonts = allFonts.filter(font => detector.detect(font));
-console.log(filteredFonts);
-
+insertRow(tbl, "Number of CPU cores", numCores);
+hash.update(numCores.toString());
 
 //adblock
 var adBlock = false;
 if (typeof noAdBlock == 'undefined'){
 	adBlock = true;
 }
-console.log(adBlock);
+insertRow(tbl, "AdBlocker Present", adBlock);
+hash.update(adBlock.toString());
 
 //canvas
-console.log(canvasData);
-
+var canvasString = strToB64(canvasData);
+insertRow(tbl, "HTML Canvas Data", canvasString);
+hash.update(canvasString);
 
 //web gl
 var canvas = document.createElement('canvas');
@@ -78,7 +111,7 @@ var vendor;
 var renderer;
 
 try {
-  gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+	gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
 } catch (e) {
 }
 
@@ -88,7 +121,26 @@ if (gl) {
   renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 }
 
-console.log(vendor, renderer);
+insertRow(tbl, "WebGL Vendor", vendor);
+hash.update(vendor);
+insertRow(tbl, "WebGL Renderer", renderer);
+hash.update(renderer);
+
+//fonts
+var allFonts = {{ fonts|tojson }};
+var detector = new Detector();
+var filteredFonts = allFonts.filter(font => detector.detect(font));
+var fontString = filteredFonts.join('; ');
+insertRow(tbl, "Fonts Available", fontString);
+hash.update(fontString);
+
+document.body.appendChild(tbl);
+
+
+var bitArray = hash.finalize();
+var fingerprint = btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
+$("#info").html("Your Fingerprint");
+$("#fingerprint").html(fingerprint);
 
 </script>
 {% endblock %}
