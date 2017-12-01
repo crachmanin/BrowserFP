@@ -24,6 +24,17 @@ function insertRow(table, val1, val2){
 	td.appendChild(document.createTextNode(val2));
 }
 
+function loadFile(filePath) {
+  var result = null;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", filePath, false);
+  xmlhttp.send();
+  if (xmlhttp.status==200) {
+    result = xmlhttp.responseText;
+  }
+  return result;
+}
+
 //console.log({{ip|tojson}});
 
 //hash value for fingerprint
@@ -38,8 +49,9 @@ insertRow(header, 'Attribute', 'Value');
 var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
 var headers = {{ headers|tojson }};
 relevantHeaders.forEach(function(entry) {
-	insertRow(tbl, entry, headers[entry]);
-	hash.update(headers[entry]);
+	var header = headers[entry] ? headers[entry] : "Null"
+	insertRow(tbl, entry, header);
+	hash.update(header);
 });
 
 //plugins
@@ -53,12 +65,14 @@ for (plug of navigator.plugins){
 	pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
 	plugCount++;
 }
+pluginString = pluginString != "" ? pluginString : "Null" 
 insertRow(tbl, 'Plugins', pluginString);
 hash.update(pluginString);
 
 //timezone
 var date = new Date();
 var offset = date.getTimezoneOffset();
+offset = offset ? offset : "Null";
 insertRow(tbl, "TimeZone Offset", offset);
 hash.update(offset.toString());
 
@@ -67,6 +81,7 @@ var width = screen.width;
 var height = screen.height;
 var colorDepth = screen.colorDepth;
 var resString = width + "x" + height + "x" + colorDepth;
+resString = resString ? resString : "Null";
 insertRow(tbl, "Screen Resolution", resString);
 hash.update(resString);
 
@@ -82,12 +97,14 @@ hash.update(cookieEnabled.toString());
 
 //platform
 var platform = navigator.platform;
+platform = platform ? platform : "Null";
 insertRow(tbl, "Platform", platform);
 hash.update(platform);
 
 //number of cores
 var numCores = navigator.hardwareConcurrency;
 insertRow(tbl, "Number of CPU cores", numCores);
+numCores = numCores ? numCores : "Null";
 hash.update(numCores.toString());
 
 //adblock
@@ -101,6 +118,7 @@ hash.update(adBlock.toString());
 //canvas
 var canvasString = strToB64(canvasData);
 insertRow(tbl, "HTML Canvas Data", canvasString);
+canvasString = canvasString ? canvasString : "Null";
 hash.update(canvasString);
 
 //web gl
@@ -121,22 +139,27 @@ if (gl) {
   renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
 }
 
+vendor = vendor ? vendor : "Null";
 insertRow(tbl, "WebGL Vendor", vendor);
 hash.update(vendor);
+
+renderer = renderer ? renderer : "Null";
 insertRow(tbl, "WebGL Renderer", renderer);
 hash.update(renderer);
 
 //fonts
-var allFonts = {{ fonts|tojson }};
+var allFonts = loadFile("static/fontlist.txt").split("\n");
 var detector = new Detector();
 var filteredFonts = allFonts.filter(font => detector.detect(font));
 var fontString = filteredFonts.join('; ');
 insertRow(tbl, "Fonts Available", fontString);
+fontString = fontString ? fontString : "Null";
 hash.update(fontString);
 
+//displaying table
 document.body.appendChild(tbl);
 
-
+//calculating fingerprint
 var bitArray = hash.finalize();
 var fingerprint = btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
 $("#info").html("Your Fingerprint");
