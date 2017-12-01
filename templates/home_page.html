@@ -1,10 +1,26 @@
 {% extends "layout.html" %}
 {% block body %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://bitwiseshiftleft.github.io/sjcl/sjcl.js"></script>
 <script src="{{url_for('static', filename='fontdetect.js')}}"></script>
+<script src="{{url_for('static', filename='adframe.js')}}"></script>
+<script src="{{url_for('static', filename='canvas.js')}}"></script>
 <script>
+
+function strToB64(input){
+	var sha = new sjcl.hash.sha256();
+	sha.update(input);
+	var bitArray = sha.finalize();
+	return btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
+}
+
 //http headers
-var data = {{ headers|tojson }};
-console.log(data);
+var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
+var headers = {{ headers|tojson }};
+relevantHeaders.forEach(function(entry) {
+    console.log(headers[entry]);
+});
+
 
 //plugins
 console.log(navigator.plugins);
@@ -41,6 +57,18 @@ var allFonts = {{ fonts|tojson }};
 var detector = new Detector();
 var filteredFonts = allFonts.filter(font => detector.detect(font));
 console.log(filteredFonts);
+
+
+//adblock
+var adBlock = false;
+if (typeof noAdBlock == 'undefined'){
+	adBlock = true;
+}
+console.log(adBlock);
+
+//canvas
+<!-console.log(canvasData);-->
+
 
 //web gl
 var canvas = document.createElement('canvas');
