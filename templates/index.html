@@ -46,80 +46,117 @@ var header = tbl.createTHead();
 insertRow(header, 'Attribute', 'Value');
 
 //http headers
-var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
-var headers = {{ headers|tojson }};
-relevantHeaders.forEach(function(entry) {
-	var header = headers[entry] ? headers[entry] : "Null"
-	insertRow(tbl, entry, header);
-	hash.update(header);
-});
+try {
+	var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
+	var headers = {{ headers|tojson }};
+	relevantHeaders.forEach(function(entry) {
+		var header = headers[entry] ? headers[entry] : "Null"
+		insertRow(tbl, entry, header);
+		hash.update(header);
+	});
+} catch (e) {
+
+}
+
 
 //plugins
-var pluginString = "";
-var plugCount = 0;
-for (plug of navigator.plugins){
-	var plugObj = new Object();
-	plugObj.name = plug.name;
-	plugObj.filename = plug.filename;
-	plugObj.description = plug.description;
-	pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
-	plugCount++;
+try {
+	var pluginString = "";
+	var plugCount = 0;
+	for (plug of navigator.plugins){
+		var plugObj = new Object();
+		plugObj.name = plug.name;
+		plugObj.filename = plug.filename;
+		plugObj.description = plug.description;
+		pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
+		plugCount++;
+	}
+	pluginString = pluginString != "" ? pluginString : "Null"
+	insertRow(tbl, 'Plugins', pluginString);
+	hash.update(pluginString);
+
+	}
+catch (e) {
+
 }
-pluginString = pluginString != "" ? pluginString : "Null" 
-insertRow(tbl, 'Plugins', pluginString);
-hash.update(pluginString);
+try {
+	//timezone
+	var date = new Date();
+	var offset = date.getTimezoneOffset();
+	offset = offset ? offset : "Null";
+	insertRow(tbl, "TimeZone Offset", offset);
+	hash.update(offset.toString());
 
-//timezone
-var date = new Date();
-var offset = date.getTimezoneOffset();
-offset = offset ? offset : "Null";
-insertRow(tbl, "TimeZone Offset", offset);
-hash.update(offset.toString());
+	//screen resolution
+	var width = screen.width;
+	var height = screen.height;
+	var colorDepth = screen.colorDepth;
+	var resString = width + "x" + height + "x" + colorDepth;
+	resString = resString ? resString : "Null";
+	insertRow(tbl, "Screen Resolution", resString);
+	hash.update(resString);
+} catch (e) {
 
-//screen resolution
-var width = screen.width;
-var height = screen.height;
-var colorDepth = screen.colorDepth;
-var resString = width + "x" + height + "x" + colorDepth;
-resString = resString ? resString : "Null";
-insertRow(tbl, "Screen Resolution", resString);
-hash.update(resString);
-
-//do not track
-var dnt = navigator.doNotTrack != null ? true : false;
-insertRow(tbl, "Do Not Track", dnt);
-hash.update(dnt.toString());
-
-//cookies enabled
-var cookieEnabled = navigator.cookieEnabled;
-insertRow(tbl, "Cookies Enabled", cookieEnabled);
-hash.update(cookieEnabled.toString());
-
-//platform
-var platform = navigator.platform;
-platform = platform ? platform : "Null";
-insertRow(tbl, "Platform", platform);
-hash.update(platform);
-
-//number of cores
-var numCores = navigator.hardwareConcurrency;
-insertRow(tbl, "Number of CPU cores", numCores);
-numCores = numCores ? numCores : "Null";
-hash.update(numCores.toString());
-
-//adblock
-var adBlock = false;
-if (typeof noAdBlock == 'undefined'){
-	adBlock = true;
 }
-insertRow(tbl, "AdBlocker Present", adBlock);
-hash.update(adBlock.toString());
 
-//canvas
-var canvasString = strToB64(canvasData);
-insertRow(tbl, "HTML Canvas Data", canvasString);
-canvasString = canvasString ? canvasString : "Null";
-hash.update(canvasString);
+
+try {
+	//do not track
+	var dnt = navigator.doNotTrack != null ? true : false;
+	insertRow(tbl, "Do Not Track", dnt);
+	hash.update(dnt.toString());
+} catch (e) {
+
+}
+
+try {
+	//cookies enabled
+	var cookieEnabled = navigator.cookieEnabled;
+	insertRow(tbl, "Cookies Enabled", cookieEnabled);
+	hash.update(cookieEnabled.toString());
+
+	//platform
+	var platform = navigator.platform;
+	platform = platform ? platform : "Null";
+	insertRow(tbl, "Platform", platform);
+	hash.update(platform);
+} catch (e) {
+
+}
+
+try {
+	//number of cores
+	var numCores = navigator.hardwareConcurrency;
+	insertRow(tbl, "Number of CPU cores", numCores);
+	numCores = numCores ? numCores : "Null";
+	hash.update(numCores.toString());
+} catch (e) {
+
+}
+
+try {
+	//adblock
+	var adBlock = false;
+	if (typeof noAdBlock == 'undefined'){
+		adBlock = true;
+	}
+	insertRow(tbl, "AdBlocker Present", adBlock);
+	hash.update(adBlock.toString());
+} catch (e) {
+
+}
+
+try {
+	//canvas
+	var canvasString = strToB64(canvasData);
+	insertRow(tbl, "HTML Canvas Data", canvasString);
+	canvasString = canvasString ? canvasString : "Null";
+	hash.update(canvasString);
+} catch (e) {
+
+}
+
+
 
 //web gl
 var canvas = document.createElement('canvas');
@@ -146,15 +183,19 @@ hash.update(vendor);
 renderer = renderer ? renderer : "Null";
 insertRow(tbl, "WebGL Renderer", renderer);
 hash.update(renderer);
+try {
+	//fonts
+	var allFonts = loadFile("static/fontlist.txt").split("\n");
+	var detector = new Detector();
+	var filteredFonts = allFonts.filter(font => detector.detect(font));
+	var fontString = filteredFonts.join('; ');
+	insertRow(tbl, "Fonts Available", fontString);
+	fontString = fontString ? fontString : "Null";
+	hash.update(fontString);
+} catch (e) {
 
-//fonts
-var allFonts = loadFile("static/fontlist.txt").split("\n");
-var detector = new Detector();
-var filteredFonts = allFonts.filter(font => detector.detect(font));
-var fontString = filteredFonts.join('; ');
-insertRow(tbl, "Fonts Available", fontString);
-fontString = fontString ? fontString : "Null";
-hash.update(fontString);
+}
+
 
 //displaying table
 document.body.appendChild(tbl);
