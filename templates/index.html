@@ -183,6 +183,21 @@ hash.update(vendor);
 renderer = renderer ? renderer : "Null";
 insertRow(tbl, "WebGL Renderer", renderer);
 hash.update(renderer);
+
+try {
+	//audio sample rate
+	var AudioContext = window.AudioContext || window.webkitAudioContext;
+	var audioCtx = new AudioContext();
+	var audioSampleRate = audioCtx.sampleRate;
+	insertRow(tbl, "Audio Sample Rate", audioSampleRate);
+	audioSampleRate = audioSampleRate ? audioSampleRate : "Null";
+	hash.update(audioSampleRate);
+} catch (e) {
+
+}
+
+
+
 try {
 	//fonts
 	var allFonts = loadFile("static/fontlist.txt").split("\n");
@@ -195,6 +210,7 @@ try {
 } catch (e) {
 
 }
+
 
 
 //displaying table
