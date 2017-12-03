@@ -192,9 +192,19 @@ try {
 	insertRow(tbl, "Audio Sample Rate", audioSampleRate);
 	audioSampleRate = audioSampleRate ? audioSampleRate : "Null";
 	hash.update(audioSampleRate);
+
+	//default latency Only for Chrome
+	const audioCtx1 = new AudioContext();
+	audioLatency = audioCtx1.baseLatency
+
+	insertRow(tbl, "Audio Base Latency", audioLatency);
+	audioLatency = audioLatency ? audioLatency : "Null";
+	hash.update(audioLatency);
+
 } catch (e) {
 
 }
+
 
 
 
