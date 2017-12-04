@@ -11,5 +11,12 @@ def hello_world():
     return render_template("index.html", headers=dict(headers),
                            ip=request.remote_addr)
 
+
+@app.route('/social.html')
+def social():
+    headers = request.headers
+    return render_template("social.html", headers=dict(headers),
+                           ip=request.remote_addr)
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
