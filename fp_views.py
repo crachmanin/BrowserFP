@@ -56,6 +56,7 @@ def create_db_and_table(cursor):
                    do_not_track VARCHAR(20),
                    cookies_enabled VARCHAR(20),
                    platform VARCHAR(20),
+                   hardware_concurrency VARCHAR(20),
                    cpu_cores VARCHAR(20),
                    adblocker_present VARCHAR(20),
                    html_canvas_data VARCHAR(20),
@@ -88,6 +89,47 @@ def social():
     headers = request.headers
     return render_template("social.html", headers=dict(headers),
                            ip=request.remote_addr)
+
+
+@app.route('/plot.html')
+def plot():
+    return render_template("plot.html")
+
+
+@app.route('/stats')
+def stats():
+    db = connect_to_cloudsql()
+    cursor = db.cursor()
+
+    create_db_and_table(cursor)
+    db.commit()
+
+    query_string = """SELECT
+                   COUNT(DISTINCT fingerprint) AS fingerprint_count ,
+                   COUNT(DISTINCT user_agent) AS user_agent_count ,
+                   COUNT(DISTINCT accept) AS accept_count ,
+                   COUNT(DISTINCT accept_encoding) AS accept_encoding_count ,
+                   COUNT(DISTINCT accept_language) AS accept_language_count ,
+                   COUNT(DISTINCT plugins) AS plugins_count ,
+                   COUNT(DISTINCT screen_resolution) AS screen_resolution_count ,
+                   COUNT(DISTINCT platform) AS platform_count ,
+                   COUNT(DISTINCT hardware_concurrency) AS hardware_concurrency_count ,
+                   COUNT(DISTINCT html_canvas_data) AS html_canvas_data_count ,
+                   COUNT(DISTINCT webgl_vendor) AS webgl_vendor_count ,
+                   COUNT(DISTINCT webgl_renderer) AS webgl_renderer_count ,
+                   COUNT(DISTINCT audio_sample_rate) AS audio_sample_rate_count ,
+                   COUNT(DISTINCT audio_base_latency) AS audio_base_latency_count ,
+                   COUNT(DISTINCT fonts_available) AS fonts_available_count ,
+                   COUNT(DISTINCT logged_in_to) AS logged_in_to_count
+                   FROM fp_db.fp_table; """
+
+    cursor.execute(query_string)
+
+    result = []
+    for r in cursor.fetchall():
+        result.append(r)
+
+    return json.dumps(result[0])
 
 
 @app.route('/dbput', methods=["POST"])

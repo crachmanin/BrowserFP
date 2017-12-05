@@ -188,8 +188,8 @@ try {
 	//number of cores
 	var numCores = navigator.hardwareConcurrency;
 	numCores = numCores ? numCores : "Null";
-	fpObj[cleanStr("CPU Cores")] = numCores.toString();
-	insertRow(tbl, "CPU Cores", numCores);
+	fpObj[cleanStr("Hardware Concurrency")] = numCores.toString();
+	insertRow(tbl, "Hardware Concurrency", numCores);
 	hash.update(numCores.toString());
 } catch (e) {
 
