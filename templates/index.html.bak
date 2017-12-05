@@ -7,7 +7,6 @@
 <script src="{{url_for('static', filename='fontdetect.js')}}"></script>
 <script src="{{url_for('static', filename='adframe.js')}}"></script>
 <script src="{{url_for('static', filename='canvas.js')}}"></script>
-<script src="{{url_for('static', filename='socialmedia.js')}}"></script>
 <script>
 
 function strToB64(input){
@@ -17,57 +16,12 @@ function strToB64(input){
 	return btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
 }
 
-function cleanStr(input){
-	return input.replace(/[- ]/g, '_').toLowerCase();
-}
-
 function insertRow(table, val1, val2){
 	var tr = table.insertRow();
 	var td = tr.insertCell();
 	td.appendChild(document.createTextNode(val1));
 	td = tr.insertCell();
 	td.appendChild(document.createTextNode(val2));
-}
-
-function addSocialAndCalcFP(table, hash, fpObj, networks, rowAppend){
-	var filteredNetworks = [];
-	for (network of networks) {
-		if (network.val) {
-			filteredNetworks.push(network.name);
-		}
-	}
-	filteredNetworks.sort();
-	var networkStr = filteredNetworks.join(', ');
-
-	networkStr = networkStr.length > 0 ? networkStr : "Null"
-	fpObj[cleanStr("Logged in to")] = strToB64(networkStr);
-	rowAppend(table, "Logged in to", networkStr);
-	hash.update(networkStr);
-
-	//displaying table
-	document.body.appendChild(tbl);
-
-	//calculating fingerprint
-	var bitArray = hash.finalize();
-	var fingerprint = btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
-	$("#info").html("Your Fingerprint");
-	$("#fingerprint").html(fingerprint);
-
-	fpObj[cleanStr("Fingerprint")] = fingerprint;
-
-	//sending fingerprint to backend
-	$.ajax({
-		type: "POST",
-		url: "dbput",
-		// The key needs to match your method's input parameter (case-sensitive).
-		data: JSON.stringify(fpObj),
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		//success: function(data){alert(data);},
-		//failure: function(errMsg) {
-		//	alert(errMsg);
-		//}
-	});
 }
 
 function loadFile(filePath) {
@@ -83,8 +37,6 @@ function loadFile(filePath) {
 
 //console.log({{ip|tojson}});
 
-var fpObj = {};
-
 //hash value for fingerprint
 var hash = new sjcl.hash.sha256();
 
@@ -98,8 +50,7 @@ try {
 	var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
 	var headers = {{ headers|tojson }};
 	relevantHeaders.forEach(function(entry) {
-		var header = headers[entry] ? headers[entry] : "Null";
-		fpObj[cleanStr(entry)] = strToB64(header);
+		var header = headers[entry] ? headers[entry] : "Null"
 		insertRow(tbl, entry, header);
 		hash.update(header);
 	});
@@ -112,19 +63,16 @@ try {
 try {
 	var pluginString = "";
 	var plugCount = 0;
-	if (navigator.plugins != null) {
-		for (plug of navigator.plugins){
-			var plugObj = new Object();
-			plugObj.name = plug.name;
-			plugObj.filename = plug.filename;
-			plugObj.description = plug.description;
-			pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
-			plugCount++;
-		}
+	for (plug of navigator.plugins){
+		var plugObj = new Object();
+		plugObj.name = plug.name;
+		plugObj.filename = plug.filename;
+		plugObj.description = plug.description;
+		pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
+		plugCount++;
 	}
 	pluginString = pluginString != "" ? pluginString : "Null"
-	fpObj[cleanStr("Plugins")] = strToB64(pluginString);
-	insertRow(tbl, "Plugins", pluginString);
+	insertRow(tbl, 'Plugins', pluginString);
 	hash.update(pluginString);
 
 	}
@@ -136,20 +84,15 @@ try {
 	var date = new Date();
 	var offset = date.getTimezoneOffset();
 	offset = offset ? offset : "Null";
-	fpObj[cleanStr("TimeZone offset")] = offset.toString();
 	insertRow(tbl, "TimeZone Offset", offset);
 	hash.update(offset.toString());
 
 	//screen resolution
 	var width = screen.width;
-	height = height ? height : "Null";
 	var height = screen.height;
-	height = height ? height : "Null";
 	var colorDepth = screen.colorDepth;
-	colorDepth = colorDepth ? colorDepth : "Null";
-
 	var resString = width + "x" + height + "x" + colorDepth;
-	fpObj[cleanStr("Screen Resolution")] = resString;
+	resString = resString ? resString : "Null";
 	insertRow(tbl, "Screen Resolution", resString);
 	hash.update(resString);
 } catch (e) {
@@ -160,7 +103,6 @@ try {
 try {
 	//do not track
 	var dnt = navigator.doNotTrack != null ? true : false;
-	fpObj[cleanStr("Do Not Track")] = dnt.toString();
 	insertRow(tbl, "Do Not Track", dnt);
 	hash.update(dnt.toString());
 } catch (e) {
@@ -170,14 +112,12 @@ try {
 try {
 	//cookies enabled
 	var cookieEnabled = navigator.cookieEnabled;
-	fpObj[cleanStr("Cookies Enabled")] = cookieEnabled.toString();
 	insertRow(tbl, "Cookies Enabled", cookieEnabled);
 	hash.update(cookieEnabled.toString());
 
 	//platform
 	var platform = navigator.platform;
 	platform = platform ? platform : "Null";
-	fpObj[cleanStr("Platform")] = platform.toString();
 	insertRow(tbl, "Platform", platform);
 	hash.update(platform);
 } catch (e) {
@@ -187,9 +127,8 @@ try {
 try {
 	//number of cores
 	var numCores = navigator.hardwareConcurrency;
+	insertRow(tbl, "Number of CPU cores", numCores);
 	numCores = numCores ? numCores : "Null";
-	fpObj[cleanStr("Hardware Concurrency")] = numCores.toString();
-	insertRow(tbl, "Hardware Concurrency", numCores);
 	hash.update(numCores.toString());
 } catch (e) {
 
@@ -201,7 +140,6 @@ try {
 	if (typeof noAdBlock == 'undefined'){
 		adBlock = true;
 	}
-	fpObj[cleanStr("AdBlocker Present")] = adBlock.toString();
 	insertRow(tbl, "AdBlocker Present", adBlock);
 	hash.update(adBlock.toString());
 } catch (e) {
@@ -211,9 +149,8 @@ try {
 try {
 	//canvas
 	var canvasString = strToB64(canvasData);
-	canvasString = canvasString ? canvasString : "Null";
-	fpObj[cleanStr("HTML Canvas Data")] = canvasString;
 	insertRow(tbl, "HTML Canvas Data", canvasString);
+	canvasString = canvasString ? canvasString : "Null";
 	hash.update(canvasString);
 } catch (e) {
 
@@ -240,12 +177,10 @@ if (gl) {
 }
 
 vendor = vendor ? vendor : "Null";
-fpObj[cleanStr("WebGL vendor")] = strToB64(vendor);
 insertRow(tbl, "WebGL Vendor", vendor);
 hash.update(vendor);
 
 renderer = renderer ? renderer : "Null";
-fpObj[cleanStr("WebGL renderer")] = strToB64(renderer);
 insertRow(tbl, "WebGL Renderer", renderer);
 hash.update(renderer);
 
@@ -254,23 +189,23 @@ try {
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var audioCtx = new AudioContext();
 	var audioSampleRate = audioCtx.sampleRate;
-	audioSampleRate = audioSampleRate ? audioSampleRate : "Null";
-	fpObj[cleanStr("Audio Sample Rate")] = audioSampleRate.toString();
 	insertRow(tbl, "Audio Sample Rate", audioSampleRate);
-	hash.update(audioSampleRate.toString());
+	audioSampleRate = audioSampleRate ? audioSampleRate : "Null";
+	hash.update(audioSampleRate);
 
 	//default latency Only for Chrome
 	const audioCtx1 = new AudioContext();
 	audioLatency = audioCtx1.baseLatency
 
-	audioLatency = audioLatency ? audioLatency : "Null";
-	fpObj[cleanStr("Audio Base Latency")] = audioLatency.toString();
 	insertRow(tbl, "Audio Base Latency", audioLatency);
-	hash.update(audioLatency.toString());
+	audioLatency = audioLatency ? audioLatency : "Null";
+	hash.update(audioLatency);
 
 } catch (e) {
 
 }
+
+
 
 
 try {
@@ -279,15 +214,23 @@ try {
 	var detector = new Detector();
 	var filteredFonts = allFonts.filter(font => detector.detect(font));
 	var fontString = filteredFonts.join('; ');
-	fontString = fontString ? fontString : "Null";
-	fpObj[cleanStr("Fonts Available")] = strToB64(fontString);
 	insertRow(tbl, "Fonts Available", fontString);
+	fontString = fontString ? fontString : "Null";
 	hash.update(fontString);
 } catch (e) {
 
 }
 
-leakSocialMediaAccounts(addSocialAndCalcFP, tbl, hash, fpObj, insertRow);
+
+
+//displaying table
+document.body.appendChild(tbl);
+
+//calculating fingerprint
+var bitArray = hash.finalize();
+var fingerprint = btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
+$("#info").html("Your Fingerprint");
+$("#fingerprint").html(fingerprint);
 
 </script>
 {% endblock %}

@@ -84,13 +84,6 @@ def hello_world():
                            ip=request.remote_addr)
 
 
-@app.route('/social.html')
-def social():
-    headers = request.headers
-    return render_template("social.html", headers=dict(headers),
-                           ip=request.remote_addr)
-
-
 @app.route('/plot.html')
 def plot():
     return render_template("plot.html")
