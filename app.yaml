@@ -23,6 +23,13 @@ handlers:
 libraries:
 - name: flask
   version: latest
-- name: jinja2
-  version: latest
+- name: MySQLdb
+  version: "latest"
 # [END libraries]
+
+env_variables:
+    CLOUDSQL_CONNECTION_NAME: striking-optics-184201:us-central1:browser-fp
+    CLOUDSQL_USER: root
+    CLOUDSQL_PASSWORD:
+
+
