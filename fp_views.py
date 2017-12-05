@@ -1,6 +1,7 @@
 import os
 import MySQLdb
 import logging
+import json
 from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask import request, render_template
@@ -44,7 +45,7 @@ def create_db_and_table(cursor):
     cursor.execute("CREATE DATABASE IF NOT EXISTS fp_db;")
 
     cursor.execute(""" CREATE TABLE IF NOT EXISTS fp_db.fp_table(
-                   fingerprint VARCHAR(20),
+                   fingerprint VARCHAR(20) PRIMARY KEY,
                    user_agent VARCHAR(20),
                    accept VARCHAR(20),
                    accept_encoding VARCHAR(20),
@@ -56,13 +57,24 @@ def create_db_and_table(cursor):
                    cookies_enabled VARCHAR(20),
                    platform VARCHAR(20),
                    cpu_cores VARCHAR(20),
-                   using_adblocker VARCHAR(20),
+                   adblocker_present VARCHAR(20),
                    html_canvas_data VARCHAR(20),
-                   web_gl_vendor VARCHAR(20),
-                   web_gl_renderer VARCHAR(20),
+                   webgl_vendor VARCHAR(20),
+                   webgl_renderer VARCHAR(20),
                    audio_sample_rate VARCHAR(20),
+                   audio_base_latency VARCHAR(20),
                    fonts_available VARCHAR(20),
                    logged_in_to VARCHAR(20)); """)
+
+
+def insert_fp(cursor, fp_dict):
+    vals = ["\'" + val + "\'" for val in fp_dict.values()]
+    columns = "(" + ", ".join(fp_dict.keys()) + ")"
+    values = "(" + ", ".join(vals) + ")"
+    query_string = "INSERT IGNORE INTO fp_db.fp_table %s VALUES %s;" % (columns, values)
+    app.logger.info(query_string)
+    cursor.execute(query_string)
+
 
 @app.route('/')
 def hello_world():
@@ -78,16 +90,22 @@ def social():
                            ip=request.remote_addr)
 
 
-@app.route('/dbput')
+@app.route('/dbput', methods=["POST"])
 def db_put():
     db = connect_to_cloudsql()
     cursor = db.cursor()
 
     create_db_and_table(cursor)
 
+    # get json object of fingerprint from request
+    fp_dict = json.loads(request.data, encoding="utf-8")
+    insert_fp(cursor, fp_dict)
+
     result = []
     for r in cursor.fetchall():
         result.append(str(r))
+
+    db.commit()
 
     return "\n".join(result)
 

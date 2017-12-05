@@ -1,7 +1,7 @@
 /*
  * code based off of https://robinlinus.github.io/socialmedia-leak/
  */
-function leakSocialMediaAccounts (callback, table, hash, rowAppend) {
+function leakSocialMediaAccounts (callback, table, hash, fpObj, rowAppend) {
     var platforms = [{
         domain: "https://squareup.com",
         redirect: "/login?return_to=%2Ffavicon.ico",
@@ -67,10 +67,6 @@ function leakSocialMediaAccounts (callback, table, hash, rowAppend) {
         redirect: "/login/de/index?ref=http://eu.battle.net/favicon.ico",
         name: "Battle.net"
     }, {
-        domain: "https://store.steampowered.com",
-        redirect: "/login/?redir=favicon.ico",
-        name: "Steam"
-    }, {
         domain: "https://accounts.google.com",
         redirect: "/ServiceLogin?service=blogger&hl=de&passive=1209600&continue=https://www.blogger.com/favicon.ico",
         name: "Google Blogger"
@@ -124,13 +120,13 @@ function leakSocialMediaAccounts (callback, table, hash, rowAppend) {
             //console.log(network.name);
             result.push({ name : network.name, val : true });
             if (result.length == platforms.length){
-               callback(table, hash, result, rowAppend)
+               callback(table, hash, fpObj, result, rowAppend)
             }
         };
         img.onerror = function() {
             result.push({ name : network.name, val : false });
             if (result.length == platforms.length){
-               callback(table, hash, result, rowAppend)
+               callback(table, hash, fpObj, result, rowAppend)
             }
         };
     });

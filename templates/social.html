@@ -17,6 +17,10 @@ function strToB64(input){
 	return btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
 }
 
+function cleanStr(input){
+	return input.replace(/[- ]/g, '_').toLowerCase();
+}
+
 function insertRow(table, val1, val2){
 	var tr = table.insertRow();
 	var td = tr.insertCell();
@@ -25,7 +29,7 @@ function insertRow(table, val1, val2){
 	td.appendChild(document.createTextNode(val2));
 }
 
-function addSocialAndCalcFP(table, hash, networks, rowAppend){
+function addSocialAndCalcFP(table, hash, fpObj, networks, rowAppend){
 	var filteredNetworks = [];
 	for (network of networks) {
 		if (network.val) {
@@ -35,10 +39,8 @@ function addSocialAndCalcFP(table, hash, networks, rowAppend){
 	filteredNetworks.sort();
 	var networkStr = filteredNetworks.join(', ');
 
-	if (filteredNetworks.length == 0) {
-		networkStr = "Null"
-	}
-
+	networkStr = networkStr.length > 0 ? networkStr : "Null"
+	fpObj[cleanStr("Logged in to")] = strToB64(networkStr);
 	rowAppend(table, "Logged in to", networkStr);
 	hash.update(networkStr);
 
@@ -50,6 +52,22 @@ function addSocialAndCalcFP(table, hash, networks, rowAppend){
 	var fingerprint = btoa(String.fromCharCode.apply(null, new Uint8Array(bitArray)));
 	$("#info").html("Your Fingerprint");
 	$("#fingerprint").html(fingerprint);
+
+	fpObj[cleanStr("Fingerprint")] = fingerprint;
+
+	//sending fingerprint to backend
+	$.ajax({
+		type: "POST",
+		url: "dbput",
+		// The key needs to match your method's input parameter (case-sensitive).
+		data: JSON.stringify(fpObj),
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		//success: function(data){alert(data);},
+		//failure: function(errMsg) {
+		//	alert(errMsg);
+		//}
+	});
 }
 
 function loadFile(filePath) {
@@ -65,6 +83,8 @@ function loadFile(filePath) {
 
 //console.log({{ip|tojson}});
 
+var fpObj = {};
+
 //hash value for fingerprint
 var hash = new sjcl.hash.sha256();
 
@@ -78,7 +98,8 @@ try {
 	var relevantHeaders = ["User-Agent", "Accept", "Accept-Encoding", "Accept-Language"];
 	var headers = {{ headers|tojson }};
 	relevantHeaders.forEach(function(entry) {
-		var header = headers[entry] ? headers[entry] : "Null"
+		var header = headers[entry] ? headers[entry] : "Null";
+		fpObj[cleanStr(entry)] = strToB64(header);
 		insertRow(tbl, entry, header);
 		hash.update(header);
 	});
@@ -91,16 +112,19 @@ try {
 try {
 	var pluginString = "";
 	var plugCount = 0;
-	for (plug of navigator.plugins){
-		var plugObj = new Object();
-		plugObj.name = plug.name;
-		plugObj.filename = plug.filename;
-		plugObj.description = plug.description;
-		pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
-		plugCount++;
+	if (navigator.plugins != null) {
+		for (plug of navigator.plugins){
+			var plugObj = new Object();
+			plugObj.name = plug.name;
+			plugObj.filename = plug.filename;
+			plugObj.description = plug.description;
+			pluginString += `plugin ${plugCount}: ${JSON.stringify(plugObj)}; `;
+			plugCount++;
+		}
 	}
 	pluginString = pluginString != "" ? pluginString : "Null"
-	insertRow(tbl, 'Plugins', pluginString);
+	fpObj[cleanStr("Plugins")] = strToB64(pluginString);
+	insertRow(tbl, "Plugins", pluginString);
 	hash.update(pluginString);
 
 	}
@@ -112,15 +136,20 @@ try {
 	var date = new Date();
 	var offset = date.getTimezoneOffset();
 	offset = offset ? offset : "Null";
+	fpObj[cleanStr("TimeZone offset")] = offset.toString();
 	insertRow(tbl, "TimeZone Offset", offset);
 	hash.update(offset.toString());
 
 	//screen resolution
 	var width = screen.width;
+	height = height ? height : "Null";
 	var height = screen.height;
+	height = height ? height : "Null";
 	var colorDepth = screen.colorDepth;
+	colorDepth = colorDepth ? colorDepth : "Null";
+
 	var resString = width + "x" + height + "x" + colorDepth;
-	resString = resString ? resString : "Null";
+	fpObj[cleanStr("Screen Resolution")] = resString;
 	insertRow(tbl, "Screen Resolution", resString);
 	hash.update(resString);
 } catch (e) {
@@ -131,6 +160,7 @@ try {
 try {
 	//do not track
 	var dnt = navigator.doNotTrack != null ? true : false;
+	fpObj[cleanStr("Do Not Track")] = dnt.toString();
 	insertRow(tbl, "Do Not Track", dnt);
 	hash.update(dnt.toString());
 } catch (e) {
@@ -140,12 +170,14 @@ try {
 try {
 	//cookies enabled
 	var cookieEnabled = navigator.cookieEnabled;
+	fpObj[cleanStr("Cookies Enabled")] = cookieEnabled.toString();
 	insertRow(tbl, "Cookies Enabled", cookieEnabled);
 	hash.update(cookieEnabled.toString());
 
 	//platform
 	var platform = navigator.platform;
 	platform = platform ? platform : "Null";
+	fpObj[cleanStr("Platform")] = platform.toString();
 	insertRow(tbl, "Platform", platform);
 	hash.update(platform);
 } catch (e) {
@@ -155,8 +187,9 @@ try {
 try {
 	//number of cores
 	var numCores = navigator.hardwareConcurrency;
-	insertRow(tbl, "Number of CPU cores", numCores);
 	numCores = numCores ? numCores : "Null";
+	fpObj[cleanStr("CPU Cores")] = numCores.toString();
+	insertRow(tbl, "CPU Cores", numCores);
 	hash.update(numCores.toString());
 } catch (e) {
 
@@ -168,6 +201,7 @@ try {
 	if (typeof noAdBlock == 'undefined'){
 		adBlock = true;
 	}
+	fpObj[cleanStr("AdBlocker Present")] = adBlock.toString();
 	insertRow(tbl, "AdBlocker Present", adBlock);
 	hash.update(adBlock.toString());
 } catch (e) {
@@ -177,8 +211,9 @@ try {
 try {
 	//canvas
 	var canvasString = strToB64(canvasData);
-	insertRow(tbl, "HTML Canvas Data", canvasString);
 	canvasString = canvasString ? canvasString : "Null";
+	fpObj[cleanStr("HTML Canvas Data")] = canvasString;
+	insertRow(tbl, "HTML Canvas Data", canvasString);
 	hash.update(canvasString);
 } catch (e) {
 
@@ -205,10 +240,12 @@ if (gl) {
 }
 
 vendor = vendor ? vendor : "Null";
+fpObj[cleanStr("WebGL vendor")] = strToB64(vendor);
 insertRow(tbl, "WebGL Vendor", vendor);
 hash.update(vendor);
 
 renderer = renderer ? renderer : "Null";
+fpObj[cleanStr("WebGL renderer")] = strToB64(renderer);
 insertRow(tbl, "WebGL Renderer", renderer);
 hash.update(renderer);
 
@@ -217,17 +254,19 @@ try {
 	var AudioContext = window.AudioContext || window.webkitAudioContext;
 	var audioCtx = new AudioContext();
 	var audioSampleRate = audioCtx.sampleRate;
-	insertRow(tbl, "Audio Sample Rate", audioSampleRate);
 	audioSampleRate = audioSampleRate ? audioSampleRate : "Null";
-	hash.update(audioSampleRate);
+	fpObj[cleanStr("Audio Sample Rate")] = audioSampleRate.toString();
+	insertRow(tbl, "Audio Sample Rate", audioSampleRate);
+	hash.update(audioSampleRate.toString());
 
 	//default latency Only for Chrome
 	const audioCtx1 = new AudioContext();
 	audioLatency = audioCtx1.baseLatency
 
-	insertRow(tbl, "Audio Base Latency", audioLatency);
 	audioLatency = audioLatency ? audioLatency : "Null";
-	hash.update(audioLatency);
+	fpObj[cleanStr("Audio Base Latency")] = audioLatency.toString();
+	insertRow(tbl, "Audio Base Latency", audioLatency);
+	hash.update(audioLatency.toString());
 
 } catch (e) {
 
@@ -240,14 +279,15 @@ try {
 	var detector = new Detector();
 	var filteredFonts = allFonts.filter(font => detector.detect(font));
 	var fontString = filteredFonts.join('; ');
-	insertRow(tbl, "Fonts Available", fontString);
 	fontString = fontString ? fontString : "Null";
+	fpObj[cleanStr("Fonts Available")] = strToB64(fontString);
+	insertRow(tbl, "Fonts Available", fontString);
 	hash.update(fontString);
 } catch (e) {
 
 }
 
-leakSocialMediaAccounts(addSocialAndCalcFP, tbl, hash, insertRow);
+leakSocialMediaAccounts(addSocialAndCalcFP, tbl, hash, fpObj, insertRow);
 
 </script>
 {% endblock %}
