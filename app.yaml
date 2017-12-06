@@ -4,6 +4,7 @@ threadsafe: true
 
 skip_files:
 - venv/
+- mysql/
 - __pycache__/
 
 # [START handlers]
@@ -25,11 +26,11 @@ libraries:
   version: latest
 - name: MySQLdb
   version: "latest"
+- name: gevent
+  version: "latest"
 # [END libraries]
 
 env_variables:
     CLOUDSQL_CONNECTION_NAME: striking-optics-184201:us-central1:browser-fp
     CLOUDSQL_USER: root
-    CLOUDSQL_PASSWORD:
-
-
+    CLOUDSQL_PASSWORD: ""

@@ -19,8 +19,8 @@ var barChartData = {
   labels: LABELS,
   datasets: [{
     label : '',
-    backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-    borderColor: window.chartColors.red,
+    backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+    borderColor: window.chartColors.blue,
     borderWidth: 1,
     data: DATA
   }]
@@ -58,36 +58,44 @@ window.onload = function() {
 
 };
 
-var colorNames = Object.keys(window.chartColors);
-document.getElementById('addDataset').addEventListener('click', function() {
-  var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
-  var dsColor = window.chartColors[colorName];
-  var newDataset = {
-    label: 'Dataset ' + barChartData.datasets.length,
-    backgroundColor: color(dsColor).alpha(0.5).rgbString(),
-    borderColor: dsColor,
-    borderWidth: 1,
-    data: []
-  };
+var port = document.domain == "localhost" ? 5000 : 80;
 
-  for (var index = 0; index < barChartData.labels.length; ++index) {
-    newDataset.data.push(randomScalingFactor());
-  }
-
-  barChartData.datasets.push(newDataset);
+var socket = io.connect('http://' + document.domain + ':' + port + '/data');
+socket.on('response', function(msg) {
+  barChartData.datasets[0].data = JSON.parse(msg.data);
   window.myBar.update();
 });
 
-document.getElementById('addData').addEventListener('click', function() {
-  if (barChartData.datasets.length > 0) {
-    var month = MONTHS[barChartData.labels.length % MONTHS.length];
-    barChartData.labels.push(month);
+//var colorNames = Object.keys(window.chartColors);
+//document.getElementById('addDataset').addEventListener('click', function() {
+  //var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+  //var dsColor = window.chartColors[colorName];
+  //var newDataset = {
+    //label: 'Dataset ' + barChartData.datasets.length,
+    //backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+    //borderColor: dsColor,
+    //borderWidth: 1,
+    //data: []
+  //};
 
-    for (var index = 0; index < barChartData.datasets.length; ++index) {
-      //window.myBar.addData(randomScalingFactor(), index);
-      barChartData.datasets[index].data.push(randomScalingFactor());
-    }
+  //for (var index = 0; index < barChartData.labels.length; ++index) {
+    //newDataset.data.push(randomScalingFactor());
+  //}
 
-    window.myBar.update();
-  }
-});
+  //barChartData.datasets.push(newDataset);
+  //window.myBar.update();
+//});
+
+//document.getElementById('addData').addEventListener('click', function() {
+  //if (barChartData.datasets.length > 0) {
+    //var month = MONTHS[barChartData.labels.length % MONTHS.length];
+    //barChartData.labels.push(month);
+
+    //for (var index = 0; index < barChartData.datasets.length; ++index) {
+      ////window.myBar.addData(randomScalingFactor(), index);
+      //barChartData.datasets[index].data.push(randomScalingFactor());
+    //}
+
+    //window.myBar.update();
+  //}
+//});

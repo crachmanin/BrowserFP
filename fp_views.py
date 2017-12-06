@@ -5,8 +5,10 @@ import json
 from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask import request, render_template
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 # These environment variables are configured in app.yaml.
 CLOUDSQL_CONNECTION_NAME = os.environ.get('CLOUDSQL_CONNECTION_NAME')
@@ -68,29 +70,7 @@ def create_db_and_table(cursor):
                    logged_in_to VARCHAR(20)); """)
 
 
-def insert_fp(cursor, fp_dict):
-    vals = ["\'" + val + "\'" for val in fp_dict.values()]
-    columns = "(" + ", ".join(fp_dict.keys()) + ")"
-    values = "(" + ", ".join(vals) + ")"
-    query_string = "INSERT IGNORE INTO fp_db.fp_table %s VALUES %s;" % (columns, values)
-    app.logger.info(query_string)
-    cursor.execute(query_string)
-
-
-@app.route('/')
-def hello_world():
-    headers = request.headers
-    return render_template("index.html", headers=dict(headers),
-                           ip=request.remote_addr)
-
-
-@app.route('/plot.html')
-def plot():
-    return render_template("plot.html")
-
-
-@app.route('/stats')
-def stats():
+def get_counts():
     db = connect_to_cloudsql()
     cursor = db.cursor()
 
@@ -125,6 +105,31 @@ def stats():
     return json.dumps(result[0])
 
 
+def insert_fp(cursor, fp_dict):
+    vals = ["\'" + val + "\'" for val in fp_dict.values()]
+    columns = "(" + ", ".join(fp_dict.keys()) + ")"
+    values = "(" + ", ".join(vals) + ")"
+    query_string = "INSERT IGNORE INTO fp_db.fp_table %s VALUES %s;" % (columns, values)
+    cursor.execute(query_string)
+
+
+@app.route('/')
+def hello_world():
+    headers = request.headers
+    return render_template("index.html", headers=dict(headers),
+                           ip=request.remote_addr)
+
+
+@app.route('/plot.html')
+def plot():
+    return render_template("plot.html")
+
+
+@app.route('/stats')
+def stats():
+    return get_counts()
+
+
 @app.route('/dbput', methods=["POST"])
 def db_put():
     db = connect_to_cloudsql()
@@ -142,6 +147,9 @@ def db_put():
 
     db.commit()
 
+    counts = get_counts()
+    socketio.emit("response", {'data': counts}, namespace="/data", broadcast=True)
+
     return "\n".join(result)
 
 
@@ -149,4 +157,5 @@ if __name__ == "__main__":
     handler = RotatingFileHandler('fp.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
-    app.run(debug=True, port=5000)
+    # app.run(debug=True, port=5000)
+    socketio.run(app, debug=True)
