@@ -69,9 +69,11 @@ function addSocialAndCalcFP(table, hash, fpObj, networks, rowAppend){
 	fpObj[cleanStr("Fingerprint")] = fingerprint;
 
 	//sending fingerprint to backend
+	var port = document.domain == "localhost" ? 5000 : 80;
+	var endPoint = "http://" + document.domain + ":" + port + "/dbput"
 	$.ajax({
 		type: "POST",
-		url: "dbput",
+		url: endPoint,
 		// The key needs to match your method's input parameter (case-sensitive).
 		data: JSON.stringify(fpObj),
 		contentType: "application/json; charset=utf-8",

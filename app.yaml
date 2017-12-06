@@ -18,6 +18,7 @@ handlers:
 
 - url: /.*
   script: fp_views.app
+  secure: never
 # [END handlers]
 
 # [START libraries]
