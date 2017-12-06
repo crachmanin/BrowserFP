@@ -48,10 +48,10 @@ def create_db_and_table(cursor):
 
     cursor.execute(""" CREATE TABLE IF NOT EXISTS fp_db.fp_table(
                    fingerprint VARCHAR(20) PRIMARY KEY,
-                   user_agent VARCHAR(20),
-                   accept VARCHAR(20),
-                   accept_encoding VARCHAR(20),
-                   accept_language VARCHAR(20),
+                   user_agent VARCHAR(200),
+                   accept VARCHAR(50),
+                   accept_encoding VARCHAR(50),
+                   accept_language VARCHAR(50),
                    plugins VARCHAR(20),
                    timezone_offset VARCHAR(20),
                    screen_resolution VARCHAR(20),
@@ -62,12 +62,12 @@ def create_db_and_table(cursor):
                    cpu_cores VARCHAR(20),
                    adblocker_present VARCHAR(20),
                    html_canvas_data VARCHAR(20),
-                   webgl_vendor VARCHAR(20),
-                   webgl_renderer VARCHAR(20),
+                   webgl_vendor VARCHAR(40),
+                   webgl_renderer VARCHAR(40),
                    audio_sample_rate VARCHAR(20),
                    audio_base_latency VARCHAR(20),
                    fonts_available VARCHAR(20),
-                   logged_in_to VARCHAR(20)); """)
+                   logged_in_to VARCHAR(400)); """)
 
 
 def get_counts():

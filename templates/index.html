@@ -53,7 +53,7 @@ function addSocialAndCalcFP(table, hash, fpObj, networks, rowAppend){
 	var networkStr = filteredNetworks.join(', ');
 
 	networkStr = networkStr.length > 0 ? networkStr : "Null"
-	fpObj[cleanStr("Logged in to")] = strToB64(networkStr);
+	fpObj[cleanStr("Logged in to")] = networkStr;
 	rowAppend(table, "Logged in to", networkStr);
 	hash.update(networkStr);
 
@@ -73,7 +73,7 @@ function addSocialAndCalcFP(table, hash, fpObj, networks, rowAppend){
 	var endPoint = "http://" + document.domain + ":" + port + "/dbput"
 	$.ajax({
 		type: "POST",
-		url: endPoint,
+		url: "dbput",
 		// The key needs to match your method's input parameter (case-sensitive).
 		data: JSON.stringify(fpObj),
 		contentType: "application/json; charset=utf-8",
@@ -112,7 +112,7 @@ try {
 	var headers = {{ headers|tojson }};
 	relevantHeaders.forEach(function(entry) {
 		var header = headers[entry] ? headers[entry] : "Null";
-		fpObj[cleanStr(entry)] = strToB64(header);
+		fpObj[cleanStr(entry)] = header;
 		insertRow(tbl, entry, header);
 		hash.update(header);
 	});
@@ -253,12 +253,12 @@ if (gl) {
 }
 
 vendor = vendor ? vendor : "Null";
-fpObj[cleanStr("WebGL vendor")] = strToB64(vendor);
+fpObj[cleanStr("WebGL vendor")] = vendor;
 insertRow(tbl, "WebGL Vendor", vendor);
 hash.update(vendor);
 
 renderer = renderer ? renderer : "Null";
-fpObj[cleanStr("WebGL renderer")] = strToB64(renderer);
+fpObj[cleanStr("WebGL renderer")] = renderer;
 insertRow(tbl, "WebGL Renderer", renderer);
 hash.update(renderer);
 
