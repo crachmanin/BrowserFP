@@ -1,4 +1,6 @@
 {% extends "layout.html" %}
+<h2 id="info">Calculating Fingerprint...</h2>
+<h3 id="fingerprint">
 {% block body %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://bitwiseshiftleft.github.io/sjcl/sjcl.js"></script>
@@ -7,12 +9,13 @@
 <script src="{{url_for('static', filename='canvas.js')}}"></script>
 <script src="{{url_for('static', filename='socialmedia.js')}}"></script>
 
-<h1 id="info">Calculating Fingerprint...</h1>
-<h2 id="fingerprint"></h2>
-<div class="wrapper">
-	<form>
-		<input class="MyButton" type="button" value="View Fingerprint Statistics" onclick="window.location.href='plot.html'" />
-	</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="{{url_for('static', filename='utils.js')}}"></script>
+<script src="{{url_for('static', filename='plot.js')}}"></script>
+
+<div id="container" style="width: 75%;">
+	<canvas id="canvas"></canvas>
 </div>
 
 <table id="attributes">
@@ -21,6 +24,7 @@
 		<th>Value</th>
 	</tr>
 </table>
+
 <script>
 
 function strToB64(input){

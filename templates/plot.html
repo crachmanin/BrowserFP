@@ -4,14 +4,23 @@
 <script src="{{url_for('static', filename='plot.js')}}"></script>
 <style>
 canvas {
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
+
+body {
+	background-color: #f7e9e3;
+}
+
+#container {
+	width: 80%;
+}
+
 </style>
 
 <body>
-	<div id="container" style="width: 75%;">
+	<div id="container">
 		<canvas id="canvas"></canvas>
 	</div>
 </body>
