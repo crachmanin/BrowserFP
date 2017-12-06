@@ -26,8 +26,6 @@ libraries:
   version: latest
 - name: MySQLdb
   version: "latest"
-- name: gevent
-  version: "latest"
 # [END libraries]
 
 env_variables:

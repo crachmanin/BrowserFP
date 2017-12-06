@@ -1,12 +1,46 @@
-table {
+#attributes {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 50%;
+    width: 100%;
 }
 
-table, th, td {
-    border: 1px solid black;
+#attributes td, #attributes th {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
-th {
-    height: 50px;
+#attributes tr:nth-child(even){background-color: #f2f2f2;}
+#attributes tr:nth-child(odd){background-color: white;}
+
+#attributes tr:hover {background-color: #ddd;}
+
+#attributes th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #42f4d9;
+	color: #6f8481;
+	font-weight: bold;
+}
+
+h1, h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+input.MyButton {
+	width: 300px;
+	padding: 20px;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 100%;
+	background: #3366cc;
+	color: #fff;
+	border: 1px solid #3366cc;
+	border-radius: 10px;
+}
+
+.wrapper {
+	text-align: center;
+	padding: 10px 10px 20px 10px;
 }
